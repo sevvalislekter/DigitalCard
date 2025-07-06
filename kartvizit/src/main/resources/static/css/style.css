@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background-color: #0073e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Yükleme ekranı */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader-logo img {
+    width: 120px;
+    height: auto;
+}
+
+/* Sayfa içerik kutusu */
+.profile-wrapper {
+    display: none; /* JavaScript ile 6 saniye sonra açılacak */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 360px;
+    padding: 32px 24px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.photo-box {
+    margin-bottom: 20px;
+}
+
+.photo-box img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #1a73e8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+    color: #444;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #666;
+    flex: 1;
+    text-align: left;
+}
+
+.info-value {
+    flex: 2;
+    text-align: right;
+    overflow-wrap: break-word;
+}
+
+.info-value a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.info-value a:hover {
+    text-decoration: underline;
+}
+
+.profile-link {
+    margin-top: 24px;
+    font-size: 14px;
+    color: #777;
+    word-break: break-word;
+}
+
+.profile-link a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.profile-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 400px) {
+    .container {
+        width: 90vw;
+        padding: 24px 16px;
+    }
+}

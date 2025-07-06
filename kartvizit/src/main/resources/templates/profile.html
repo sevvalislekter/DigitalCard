@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Çalışan Profili</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <!-- Yükleme ekranı -->
+    <div id="preloader">
+        <div class="loader-logo">
+            <img src="/images/fups.jpg"  />
+        </div>
+    </div>
+
+    <!-- Sayfa içeriği -->
+    <div class="profile-wrapper">
+        <div class="container">
+            <div class="photo-box">
+                <img th:src="${employee.photoUrl}" alt="Profil Fotoğrafı" />
+            </div>
+
+            <h1 th:text="${employee.fullName}">Çalışan Adı</h1>
+
+            <div class="info-row">
+                <div class="info-label">Email:</div>
+                <div class="info-value">
+                    <a th:href="'mailto:' + ${employee.email}" th:text="${employee.email}"></a>
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Unvan:</div>
+                <div class="info-value" th:text="${employee.title}"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Telefon:</div>
+                <div class="info-value">
+                    <a th:href="'tel:' + ${employee.phoneNumber}" th:text="${employee.phoneNumber}"></a>
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">LinkedIn:</div>
+                <div class="info-value">
+                    <a th:href="${employee.linkedinUrl}" target="_blank" th:text="${employee.linkedinUrl}"></a>
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Web Sitesi:</div>
+                <div class="info-value">
+                    <a href="https://www.fups.com/?ysclid=mcrtxvkgmu947775332" target="_blank">https://www.fups.com.tr/</a>
+                </div>
+            </div>
+
+            <div class="profile-link">
+                Profil Linki:
+                <a th:href="@{/p/{code}(code=${employee.randomCode})}"
+                   th:text="'/p/' + ${employee.randomCode}" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        window.addEventListener("load", function () {
+            setTimeout(() => {
+                document.getElementById("preloader").style.display = "none";
+                document.querySelector(".profile-wrapper").style.display = "flex";
+            }, 6000); // 6 saniye bekle
+        });
+    </script>
+</body>
+</html>
