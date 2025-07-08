@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.sevvalislekter.entities.Employee;
-import com.sevvalislekter.repository.EmployeeRepository;
+import com.sevvalislekter.repositories.EmployeeRepository;
 
 @Controller
 public class ProfileController {

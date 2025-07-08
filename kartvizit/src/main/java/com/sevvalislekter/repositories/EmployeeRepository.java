@@ -1,4 +1,4 @@
-package com.sevvalislekter.repository;
+package com.sevvalislekter.repositories;
 
 import com.sevvalislekter.entities.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;

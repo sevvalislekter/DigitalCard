@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sevvalislekter.controller.IEmployeeController;
-import com.sevvalislekter.dto.DTOEmployee;
+import com.sevvalislekter.dto.DtoEmployee;
 import com.sevvalislekter.dto.DtoEmployeeIU;
 
 import com.sevvalislekter.services.IEmployeeService;
@@ -25,7 +25,7 @@ public class EmployeeControllerImpl implements IEmployeeController {
 
     @PostMapping(path = "/save")
     @Override
-    public DTOEmployee saveEmployee(@RequestBody DtoEmployeeIU dtoEmployeeIU) {
+    public DtoEmployee saveEmployee(@RequestBody DtoEmployeeIU dtoEmployeeIU) {
         return employeeService.saveEmployee(dtoEmployeeIU);
     }
 }

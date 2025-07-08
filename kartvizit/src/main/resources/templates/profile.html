@@ -2,71 +2,82 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Çalışan Profili</title>
+    <title th:text="${employee.firstName}+' '+${employee.lastName}"> </title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<link rel="icon" type="image/jpeg" href="/images/fups.jpg">
+
 </head>
 <body>
-    <!-- Yükleme ekranı -->
+    
     <div id="preloader">
         <div class="loader-logo">
-            <img src="/images/fups.jpg"  />
+            <img src="/images/fups.jpg" style="width:220px;animation: scaleUp 2s ease forwards; transform-origin:center;" />
         </div>
     </div>
 
-    <!-- Sayfa içeriği -->
+    
     <div class="profile-wrapper">
         <div class="container">
             <div class="photo-box">
                 <img th:src="${employee.photoUrl}" alt="Profil Fotoğrafı" />
             </div>
 
-            <h1 th:text="${employee.fullName}">Çalışan Adı</h1>
-
+			<h1 th:text="${employee.firstName} + ' ' + ${employee.lastName}"></h1>
+			<div class="info-row">
+			                <div style="display: flex;align-items: center;justify-content: center;" class="info-value" th:text="${employee.title}"></div>
+							<div class="info-label"><a th:href="'mailto:' + ${employee.email}" ><i style="padding: 10px;text-align: center;" class="fa-solid fa-envelope"></a></i></div>
+							<div class="info-label "><a th:href="'tel:' + ${employee.phoneNumber}"><i style="padding: 10px;text-align: center;" class="fa-solid fa-phone"></i></a></div>
+							<div class="info-label"><a href="https://yandex.com.tr/profile/94666010857?lang=tr&no-distribution=1&view-state=mini&source=wizbiz_new_map_single" target="_blank"><i style="padding: 10px;" class="fa-solid fa-location-dot"></i></a></div>
+							<div class="info-label"><a th:href="@{'/vcard/' + ${employee.randomCode}}" class="btn btn-primary"> <i class="fa-solid fa-user-plus"></i>Kişi ekle</a></div>
+			            </div>
+						
             <div class="info-row">
-                <div class="info-label">Email:</div>
+                <div class="info-label"><i class="fa-solid fa-envelope"></i></div>
                 <div class="info-value">
                     <a th:href="'mailto:' + ${employee.email}" th:text="${employee.email}"></a>
                 </div>
             </div>
+            
             <div class="info-row">
-                <div class="info-label">Unvan:</div>
-                <div class="info-value" th:text="${employee.title}"></div>
-            </div>
-            <div class="info-row">
-                <div class="info-label">Telefon:</div>
+                <div class="info-label"><i class="fa-solid fa-phone"></i></div>
                 <div class="info-value">
                     <a th:href="'tel:' + ${employee.phoneNumber}" th:text="${employee.phoneNumber}"></a>
                 </div>
             </div>
             <div class="info-row">
-                <div class="info-label">LinkedIn:</div>
+                <div class="info-label"><i class="fa-brands fa-linkedin"></i></div>
                 <div class="info-value">
                     <a th:href="${employee.linkedinUrl}" target="_blank" th:text="${employee.linkedinUrl}"></a>
                 </div>
             </div>
             <div class="info-row">
-                <div class="info-label">Web Sitesi:</div>
+                <div class="info-label"><i class="fa-brands fa-edge"></i></div>
                 <div class="info-value">
                     <a href="https://www.fups.com/?ysclid=mcrtxvkgmu947775332" target="_blank">https://www.fups.com.tr/</a>
                 </div>
             </div>
+			<div class="info-row">
+				<div class="info-label"><i class="fa-solid fa-location-dot"></i></div>
+				<div class="info-value">
+					<a href="https://www.google.com/maps/place/41%C2%B000'18.7%22N+29%C2%B006'22.6%22E/@41.0051827,29.1036918,17z/data=!3m1!4b1!4m4!3m3!8m2!3d41.0051827!4d29.1062667?hl=tr&entry=ttu&g_ep=EgoyMDI1MDYzMC4wIKXMDSoASAFQAw%3D%3D" target="_blank">Haritada göster</a>
+				</div>
+			</div>
 
-            <div class="profile-link">
-                Profil Linki:
-                <a th:href="@{/p/{code}(code=${employee.randomCode})}"
-                   th:text="'/p/' + ${employee.randomCode}" target="_blank"></a>
-            </div>
+           
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
-        window.addEventListener("load", function () {
-            setTimeout(() => {
-                document.getElementById("preloader").style.display = "none";
-                document.querySelector(".profile-wrapper").style.display = "flex";
-            }, 6000); // 6 saniye bekle
-        });
-    </script>
+		window.addEventListener("load", () => {
+		    
+		    setTimeout(() => {
+		        document.getElementById("preloader").style.display = "none";
+		        document.querySelector(".profile-wrapper").style.display = "flex";
+		    }, 2100);
+		});
+
+	</script>
+    
 </body>
 </html>
