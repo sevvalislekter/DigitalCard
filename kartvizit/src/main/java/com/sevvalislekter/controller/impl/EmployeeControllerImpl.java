@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sevvalislekter.controller.IEmployeeController;
-import com.sevvalislekter.dto.DtoEmployee;
-import com.sevvalislekter.dto.DtoEmployeeIU;
+
+import com.sevvalislekter.dto.EmployeeDTO;
+import com.sevvalislekter.dto.EmployeeDTOIU;
 
 import com.sevvalislekter.services.IEmployeeService;
 
 @RestController
 @RequestMapping("/rest/api/employee")
-public class EmployeeControllerImpl implements IEmployeeController {
+public class EmployeeControllerImpl {
 
 	@Autowired
     private final IEmployeeService employeeService;
@@ -24,8 +24,7 @@ public class EmployeeControllerImpl implements IEmployeeController {
     }
 
     @PostMapping(path = "/save")
-    @Override
-    public DtoEmployee saveEmployee(@RequestBody DtoEmployeeIU dtoEmployeeIU) {
-        return employeeService.saveEmployee(dtoEmployeeIU);
+    public EmployeeDTO saveEmployee(@RequestBody EmployeeDTOIU employeeDTOIU) {
+        return employeeService.saveEmployee(employeeDTOIU);
     }
 }

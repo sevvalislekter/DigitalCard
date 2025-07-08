@@ -2,11 +2,12 @@ package com.sevvalislekter.dto;
 
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 
-
+@NoArgsConstructor
 @AllArgsConstructor
-public class DtoEmployeeIU {
+public class EmployeeDTOIU {
 	
 	
     private  String firstName;
@@ -16,7 +17,17 @@ public class DtoEmployeeIU {
     private  String phoneNumber;
     private  String linkedinUrl;
     private  String randomCode;
+	private String photoUrl;
+	private String qrCodeUrl;
 	
+	public String getQrCodeUrl() {
+        return qrCodeUrl;
+    }
+
+    public void setQrCodeUrl(String qrCodeUrl) {
+        this.qrCodeUrl = qrCodeUrl;
+    }
+
 	
     public String getFirstName() {
     	return firstName;
@@ -61,6 +72,12 @@ public class DtoEmployeeIU {
 	}
 	public void setRandomCode(String randomCode) {
 		this.randomCode=randomCode;
+	}
+	 public String getPhotoUrl() {
+	    	return photoUrl;
+	}
+	public void setPhotoUrl(String photoUrl) {
+	    	this.photoUrl=photoUrl;
 	}
 }
 

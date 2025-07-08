@@ -1,5 +1,6 @@
 package com.sevvalislekter.controller;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,19 +21,20 @@ public class ProfileController {
     @GetMapping("/p/{randomCode}")
     public String showProfile(@PathVariable String randomCode, Model model) {
         System.out.println("Aranan randomCode: " + randomCode);
-        
-        
-        Employee employee = employeeRepository.findByRandomCodeCaseInsensitive(randomCode.trim());
-        
-        System.out.println("Bulunan employee: " + (employee != null ? employee.getId() : "null"));
+
+        Employee employee = employeeRepository.findByRandomCode(randomCode.trim());
 
         if (employee == null) {
             return "redirect:/notFound";
         }
 
+        System.out.println("Bulunan employee: " + employee.getId());
+
         model.addAttribute("employee", employee);
         return "profile";
     }
+
+
 
     @GetMapping("/notFound")
     public String notFoundPage() {

@@ -29,7 +29,7 @@
 							<div class="info-label"><a th:href="'mailto:' + ${employee.email}" ><i style="padding: 10px;text-align: center;" class="fa-solid fa-envelope"></a></i></div>
 							<div class="info-label "><a th:href="'tel:' + ${employee.phoneNumber}"><i style="padding: 10px;text-align: center;" class="fa-solid fa-phone"></i></a></div>
 							<div class="info-label"><a href="https://yandex.com.tr/profile/94666010857?lang=tr&no-distribution=1&view-state=mini&source=wizbiz_new_map_single" target="_blank"><i style="padding: 10px;" class="fa-solid fa-location-dot"></i></a></div>
-							<div class="info-label"><a th:href="@{'/vcard/' + ${employee.randomCode}}" class="btn btn-primary"> <i class="fa-solid fa-user-plus"></i>Kişi ekle</a></div>
+							<div><a th:href="@{'/api/vcard/' + ${employee.randomCode}}" class="btn btn-primary"> <i class="fa-solid fa-user-plus"></i>Kişi ekle</a></div>
 			            </div>
 						
             <div class="info-row">

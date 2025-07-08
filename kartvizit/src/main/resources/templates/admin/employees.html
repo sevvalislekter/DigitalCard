@@ -1,0 +1,46 @@
+<!-- src/main/resources/templates/admin/employees.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Çalışan Listesi</title>
+</head>
+<body>
+<h1>Çalışan Listesi</h1>
+<table>
+    <thead>
+    <tr>
+        <th>İsim</th>
+        <th>Soyisim</th>
+        <th>Mail</th>
+        <th>LinkedIn</th>
+        <th>Telefon</th>
+        <th>Unvan</th>
+		<th>Fotoğraf</th>
+		<th>Qr</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.firstName}"></td>
+        <td th:text="${employee.lastName}"></td>
+        <td th:text="${employee.email}"></td>
+        <td><a th:href="${employee.linkedinUrl}" th:text="${employee.linkedinUrl}"></a></td>
+        <td th:text="${employee.phoneNumber}"></td>
+        <td th:text="${employee.title}"></td>
+		<td><img th:src="${employee.photoUrl}" alt="Fotoğraf" width="100" height="100"/></td>
+		<td>
+		    <img th:src="@{${employee.qrCodeUrl}}" alt="QR Kod" width="100" height="100"/><br/>
+		    <a th:href="@{${employee.qrCodeUrl}}" 
+		       th:download="'QR-' + ${employee.firstName} + '-' + ${employee.lastName} + '.png'">
+		       İndir
+		    </a>
+		</td>
+
+
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/admin/employees/create}">Yeni Çalışan Ekle</a>
+</body>
+</html>

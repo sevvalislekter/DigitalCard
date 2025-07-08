@@ -10,14 +10,23 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class DtoEmployee {
+public class EmployeeDTO {
 
     private String firstName;
     private String lastName;
     private String title;
     private String linkedinUrl;
     private String randomCode;
-	
+	private String photoUrl;
+	private String qrCodeUrl;
+	public String getQrCodeUrl() {
+        return qrCodeUrl;
+    }
+
+    public void setQrCodeUrl(String qrCodeUrl) {
+        this.qrCodeUrl = qrCodeUrl;
+    }
+
     public String getFirstName() {
     	return firstName;
     }
@@ -49,5 +58,10 @@ public class DtoEmployee {
 	public void setRandomCode(String randomCode) {
 		this.randomCode=randomCode;
 	}
-	
+	 public String getPhotoUrl() {
+	    	return photoUrl;
+	    }
+	    public void setPhotoUrl(String photoUrl) {
+	    	this.photoUrl=photoUrl;
+	    }
 }

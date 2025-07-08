@@ -1,13 +1,22 @@
 package com.sevvalislekter.services;
 
-import com.sevvalislekter.dto.DtoEmployee;
-import com.sevvalislekter.dto.DtoEmployeeIU;
+import java.util.List;
 
+import com.sevvalislekter.dto.EmployeeDTO;
+import com.sevvalislekter.dto.EmployeeDTOIU;
+import com.sevvalislekter.entities.Employee;
 
 public interface IEmployeeService {
-	
-	public DtoEmployee saveEmployee(DtoEmployeeIU employee);
-	
-	
+
+    EmployeeDTO saveEmployee(EmployeeDTOIU employeeDtoIU);
+
+    List<Employee> getAllEmployees();
+
+    Employee getEmployeeById(Integer id);
+
+    Employee getEmployeeByRandomCode(String randomCode);
+
+    void deleteEmployee(Integer id); 
 
 }
+

@@ -1,14 +1,14 @@
 package com.sevvalislekter.entities;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "employee")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Employee {
 
     @Id
@@ -31,7 +31,10 @@ public class Employee {
     private String photoUrl;
     @Column(name = "random_code", unique = true,length = 8)
     private String randomCode;
- 
+    @Column(name = "qr_code_url")
+    private String qrCodeUrl;
+
+    
     
     public Integer getId() {
     	return id;
@@ -88,6 +91,14 @@ public class Employee {
     public void setRandomCode(String randomCode) {
     	this.randomCode=randomCode;
     }
+    public String getQrCodeUrl() {
+        return qrCodeUrl;
+    }
+
+    public void setQrCodeUrl(String qrCodeUrl) {
+        this.qrCodeUrl = qrCodeUrl;
+    }
+
 
    
 }
