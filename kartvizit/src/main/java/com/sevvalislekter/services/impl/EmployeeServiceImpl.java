@@ -11,8 +11,8 @@ import com.google.zxing.WriterException;
 import com.sevvalislekter.Utils.QRCodeGenerator;
 import com.sevvalislekter.dto.EmployeeDTO;
 import com.sevvalislekter.dto.EmployeeDTOIU;
-import com.sevvalislekter.entities.Employee;
-import com.sevvalislekter.repositories.EmployeeRepository;
+import com.sevvalislekter.entity.Employee;
+import com.sevvalislekter.repository.EmployeeRepository;
 import com.sevvalislekter.services.IEmployeeService;
 
 @Service
@@ -53,8 +53,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
         String qrContent = "http://localhost:8080/p/" + savedEmployee.getRandomCode(); // Kullanıcı profil linki
 
-        // ✅ DOĞRU DOSYA YOLU: static klasörüne tam olarak yazıyoruz
-        String qrFilePath = staticPath + File.separator + savedEmployee.getRandomCode() + ".png";
+    
+        String qrFilePath = staticPath + File.separator + savedEmployee.getFirstName()+savedEmployee.getLastName() + ".png";
 
         try {
             QRCodeGenerator.generateQRCodeImage(qrContent, qrFilePath, 250, 250);
@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         }
 
 
-        savedEmployee.setQrCodeUrl("/uploads/qr-codes/" + savedEmployee.getRandomCode() + ".png");
+        savedEmployee.setQrCodeUrl("/uploads/qr-codes/" + savedEmployee.getFirstName()+savedEmployee.getLastName() + ".png");
         employeeRepository.save(savedEmployee);
 
 

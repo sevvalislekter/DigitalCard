@@ -1,4 +1,4 @@
-package com.sevvalislekter.entities;
+package com.sevvalislekter.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.sevvalislekter.dto.EmployeeDTO;
 import com.sevvalislekter.dto.EmployeeDTOIU;
-import com.sevvalislekter.entities.Employee;
+import com.sevvalislekter.entity.Employee;
 
 public interface IEmployeeService {
 

@@ -1,8 +1,9 @@
 package com.sevvalislekter.services;
 
 import org.springframework.stereotype.Service;
-import com.sevvalislekter.entities.Employee;
-import com.sevvalislekter.repositories.EmployeeRepository;
+
+import com.sevvalislekter.entity.Employee;
+import com.sevvalislekter.repository.EmployeeRepository;
 
 import java.util.List;
 

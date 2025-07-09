@@ -1,7 +1,7 @@
 package com.sevvalislekter.controller;
 
-import com.sevvalislekter.entities.Employee;
-import com.sevvalislekter.repositories.EmployeeRepository;
+import com.sevvalislekter.entity.Employee;
+import com.sevvalislekter.repository.EmployeeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
