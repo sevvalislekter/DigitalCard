@@ -1,12 +1,7 @@
 package com.sevvalislekter.services;
-
 import org.springframework.stereotype.Service;
-
-import com.sevvalislekter.entity.Employee;
+import com.sevvalislekter.entity.EmployeeEntity;
 import com.sevvalislekter.repository.EmployeeRepository;
-
-import java.util.List;
-
 @Service
 public class EmployeeEntityService {
 
@@ -16,15 +11,10 @@ public class EmployeeEntityService {
         this.employeeRepository = employeeRepository;
     }
 
-    public Employee save(Employee employee) {
-        return employeeRepository.save(employee);
+    public EmployeeEntity save(EmployeeEntity employeeEntity) {
+        return employeeRepository.save(employeeEntity);
     }
-
-    public List<Employee> findAll() {
-        return employeeRepository.findAll();
-    }
-
-    public Employee findByRandomCode(String code) {
+    public EmployeeEntity findByRandomCode(String code) {
         return employeeRepository.findByRandomCode(code);
     }
 

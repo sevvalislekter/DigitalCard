@@ -1,15 +1,25 @@
-<!-- src/main/resources/templates/admin/employees.html -->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/style2.css}" />
     <title>Çalışan Listesi</title>
 </head>
-<body>
-<h1>Çalışan Listesi</h1>
-<table>
-    <thead>
-    <tr>
+<body class="body3" >
+	<div style="text-align: center; margin: 20px 0;justify-content: center;">
+	  <h1 class="page-title">Çalışan Listesi</h1>
+	  
+	  <a style="padding: 20px;" th:href="@{/admin/employees/create}">Yeni Çalışan Ekle</a>
+	  <a th:href="@{/admin/employees/exEmployees}">Eski Çalışanlar</a>
+	</div>
+	
+
+<table class="employee-table" >
+	
+    <thead class="tab">
+    <tr >
+		
         <th>İsim</th>
         <th>Soyisim</th>
         <th>Mail</th>
@@ -18,10 +28,11 @@
         <th>Unvan</th>
 		<th>Fotoğraf</th>
 		<th>Qr</th>
+		
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="employee : ${employees}">
+    <tbody >
+    <tr  th:each="employee : ${employees}">
         <td th:text="${employee.firstName}"></td>
         <td th:text="${employee.lastName}"></td>
         <td th:text="${employee.email}"></td>
@@ -35,12 +46,17 @@
 		       th:download="'QR-' + ${employee.firstName} + '-' + ${employee.lastName} + '.png'">
 		       İndir
 		    </a>
+			<a th:href="@{'/admin/employees/ex/' + ${employee.randomCode}}">
+			    <button>QR Pasif Et</button>
+			</a>
+
 		</td>
+		
 
 
     </tr>
     </tbody>
 </table>
-<a th:href="@{/admin/employees/create}">Yeni Çalışan Ekle</a>
+
 </body>
 </html>

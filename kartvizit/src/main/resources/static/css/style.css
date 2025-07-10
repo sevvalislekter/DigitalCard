@@ -10,6 +10,7 @@ body, html {
     justify-content: center;
     align-items: center;
 }
+
 #preloader {
     position: fixed;
     top: 0; left: 0;
@@ -39,7 +40,7 @@ body, html {
   }
 }
 
-/* Asıl sayfa başlangıçta gizli */
+
 .profile-wrapper {
     display: none;
     justify-content: center;
@@ -48,9 +49,9 @@ body, html {
     width: 100%;
 }
 
-/* Sayfa içerik kutusu */
+
 .profile-wrapper {
-    display: none; /* JavaScript ile 6 saniye sonra açılacak */
+    display: none; 
     justify-content: center;
     align-items: center;
     height: 100vh;

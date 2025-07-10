@@ -1,13 +1,16 @@
 package com.sevvalislekter.dto;
 
 
+import java.time.LocalDate;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeDTOIU {
+public class EmployeeIUDTO {
 	
 	
     private  String firstName;
@@ -19,7 +22,18 @@ public class EmployeeDTOIU {
     private  String randomCode;
 	private String photoUrl;
 	private String qrCodeUrl;
-	
+    private LocalDate exitDate;
+    private Boolean qrActive = true;  
+    private MultipartFile photo;
+
+    
+	public MultipartFile getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(MultipartFile photo) {
+        this.photo = photo;
+    }
 	public String getQrCodeUrl() {
         return qrCodeUrl;
     }
@@ -79,5 +93,21 @@ public class EmployeeDTOIU {
 	public void setPhotoUrl(String photoUrl) {
 	    	this.photoUrl=photoUrl;
 	}
+	public Boolean getQrActive() {
+	    return qrActive;
+	}
+
+	public void setQrActive(Boolean qrActive) {
+	    this.qrActive = qrActive;
+	}
+
+	public LocalDate getExitDate() {
+	    return exitDate;
+	}
+
+	public void setExitDate(LocalDate exitDate) {
+	    this.exitDate = exitDate;
+	}
+
 }
 

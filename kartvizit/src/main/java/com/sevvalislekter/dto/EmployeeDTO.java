@@ -2,6 +2,9 @@ package com.sevvalislekter.dto;
 
 
 
+import java.time.LocalDate;
+
+
 import lombok.AllArgsConstructor;
 
 
@@ -19,6 +22,9 @@ public class EmployeeDTO {
     private String randomCode;
 	private String photoUrl;
 	private String qrCodeUrl;
+    private LocalDate exitDate;
+    private Boolean qrActive=true;
+
 	public String getQrCodeUrl() {
         return qrCodeUrl;
     }
@@ -58,10 +64,26 @@ public class EmployeeDTO {
 	public void setRandomCode(String randomCode) {
 		this.randomCode=randomCode;
 	}
-	 public String getPhotoUrl() {
+	public String getPhotoUrl() {
 	    	return photoUrl;
-	    }
-	    public void setPhotoUrl(String photoUrl) {
+	}
+	public void setPhotoUrl(String photoUrl) {
 	    	this.photoUrl=photoUrl;
-	    }
+	}
+	public Boolean getQrActive() {
+	    return qrActive;
+	}
+
+	public void setQrActive(Boolean qrActive) {
+	    this.qrActive = qrActive;
+	}
+
+	public LocalDate getExitDate() {
+	    return exitDate;
+	}
+
+	public void setExitDate(LocalDate exitDate) {
+	    this.exitDate = exitDate;
+	}
+
 }

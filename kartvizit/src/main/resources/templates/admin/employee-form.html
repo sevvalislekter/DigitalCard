@@ -2,22 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Yeni Çalışan Ekle</title>
+	<link rel="stylesheet" th:href="@{/css/style2.css}" />
 </head>
-<body>
-    <h1>Yeni Çalışan Ekle</h1>
+<body class="body2">
     
-    <form th:action="@{/admin/employees/create}" method="post" enctype="multipart/form-data">
-        <input type="text" name="firstName" placeholder="Ad" required/><br/>
-        <input type="text" name="lastName" placeholder="Soyad" required/><br/>
-        <input type="email" name="email" placeholder="Email" required/><br/>
-        <input type="text" name="title" placeholder="Ünvan"/><br/>
-        <input type="text" name="phoneNumber" placeholder="Telefon"/><br/>
-        <input type="text" name="linkedinUrl" placeholder="LinkedIn URL"/><br/>
-        <label>Fotoğraf (JPEG):</label>
-        <input type="file" name="photo"/><br/>
-        <button type="submit">Kaydet</button>
+    
+    <form th:action="@{/admin/employees/create}" method="post" enctype="multipart/form-data" class="employee-form">
+		<h1 class="page-title">Yeni Çalışan Ekle</h1>
+        <input type="text" name="firstName" placeholder="Ad" required class="form-input"/><br/>
+        <input type="text" name="lastName" placeholder="Soyad" required class="form-input"/><br/>
+        <input type="email" name="email" placeholder="Email" required class="form-input"/><br/>
+        <input type="text" name="title" placeholder="Ünvan" class="form-input"/><br/>
+        <input type="text" name="phoneNumber" placeholder="Telefon" class="form-input"/><br/>
+        <input type="text" name="linkedinUrl" placeholder="LinkedIn URL" class="form-input"/><br/>
+        <label class="form-label">Fotoğraf (JPEG):</label>
+        <input type="file" name="photo" class="form-input"/><br/>
+        <button type="submit" class="form-button">Kaydet</button>
+		<a href="/admin/employees" class="page-link">Çalışanlar</a>
     </form>
 
-    <a href="/admin/employees">Çalışanlar</a>
+
 </body>
 </html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Eski Çalışanlar</title>
+    <link rel="stylesheet" th:href="@{/css/style2.css}" />
+</head>
+<body class="body3">
+
+    <div style="text-align: center; margin: 20px 0;">
+        <h1 class="page-title">Eski Çalışan Listesi</h1>
+        <a th:href="@{/admin/employees}">Aktif Çalışanlara Dön</a>
+    </div>
+
+    <table class="employee-table">
+        <thead class="tab">
+            <tr>
+                <th>İsim</th>
+                <th>Soyisim</th>
+                <th>Mail</th>
+                <th>LinkedIn</th>
+                <th>Telefon</th>
+                <th>Unvan</th>
+                <th>Fotoğraf</th>
+                <th>QR Kod</th>
+                <th>Durum</th>
+				<th>Çıkış Tarihi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.firstName}">İsim</td>
+                <td th:text="${employee.lastName}">Soyisim</td>
+                <td th:text="${employee.email}">Mail</td>
+                <td><a th:href="${employee.linkedinUrl}" th:text="${employee.linkedinUrl}">LinkedIn</a></td>
+                <td th:text="${employee.phoneNumber}">Telefon</td>
+                <td th:text="${employee.title}">Unvan</td>
+                <td>
+                    <img th:src="${employee.photoUrl}" alt="Fotoğraf" width="100" height="100"/>
+                </td>
+                <td>
+                    <img th:src="@{${employee.qrCodeUrl}}" alt="QR Kod" width="100" height="100"/><br/>
+                    <a th:href="@{${employee.qrCodeUrl}}"
+                       th:download="'QR-' + ${employee.firstName} + '-' + ${employee.lastName} + '.png'">
+                        İndir
+                    </a>
+                </td>
+                <td><span style="color:red;">QR Pasif</span></td>
+				<td th:text="${#temporals.format(employee.exitDate, 'dd.MM.yyyy')}"></td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

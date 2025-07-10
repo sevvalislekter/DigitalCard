@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.sevvalislekter.entity.Employee;
+import com.sevvalislekter.entity.EmployeeEntity;
 import com.sevvalislekter.repository.EmployeeRepository;
 
 @Controller
@@ -19,18 +19,18 @@ public class ProfileController {
     }
 
     @GetMapping("/p/{randomCode}")
-    public String showProfile(@PathVariable String randomCode, Model model) {
+    public String showProfile(@PathVariable String randomCode, Model viewData) {
         System.out.println("Aranan randomCode: " + randomCode);
 
-        Employee employee = employeeRepository.findByRandomCode(randomCode.trim());
+        EmployeeEntity employeeEntity = employeeRepository.findByRandomCode(randomCode.trim());
 
-        if (employee == null) {
+        if (employeeEntity == null) {
             return "redirect:/notFound";
         }
 
-        System.out.println("Bulunan employee: " + employee.getId());
+        System.out.println("Bulunan employee: " + employeeEntity.getId());
 
-        model.addAttribute("employee", employee);
+        viewData.addAttribute("employee", employeeEntity);
         return "profile";
     }
 

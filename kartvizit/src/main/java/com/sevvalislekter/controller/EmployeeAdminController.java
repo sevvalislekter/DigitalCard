@@ -1,79 +1,48 @@
 package com.sevvalislekter.controller;
-
-import com.sevvalislekter.dto.EmployeeDTO;
-import com.sevvalislekter.dto.EmployeeDTOIU;
-import com.sevvalislekter.entity.Employee;
-import com.sevvalislekter.services.IEmployeeService;
-
-
-import org.springframework.beans.BeanUtils;
+import com.sevvalislekter.dto.EmployeeIUDTO;
+import com.sevvalislekter.services.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 @Controller
 @RequestMapping("/admin/employees")
 public class EmployeeAdminController {
 
-    private final IEmployeeService iEmployeeService;
-  
-
-    public EmployeeAdminController(IEmployeeService iEmployeeService) {
-        this.iEmployeeService = iEmployeeService;
-      
+    private final EmployeeService employeeService;
+   
+    public EmployeeAdminController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
-
     @GetMapping
-    public String listEmployees(Model model) {
-        var employees = iEmployeeService.getAllEmployees();
-        model.addAttribute("employees", employees);
+    public String listEmployees(Model viewData) {
+        var employees = employeeService.getAllEmployees();
+        viewData.addAttribute("employees", employees);
         return "admin/employees";
     }
 
     @GetMapping("/create")
-    public String showCreateForm(Model model) {
-        model.addAttribute("employee", new EmployeeDTOIU());
+    public String showCreateForm(Model viewData) {
+    	viewData.addAttribute("employee", new EmployeeIUDTO());
         return "admin/employee-form";
+    }
+    @GetMapping("/ex/{randomCode}")
+    public String deactiveQr(@PathVariable String randomCode) {
+      employeeService.deactivateEmployeeByRandomCode(randomCode);
+
+        return "redirect:/admin/employees/exEmployees";
+    }
+    @GetMapping("/exEmployees")
+    public String showExEmployees(Model viewData) {
+        var exEmployees = employeeService.findByQrActiveFalse();
+        viewData.addAttribute("employees", exEmployees);
+        return "admin/exEmployees"; // 
     }
 
     @PostMapping("/create")
-    public String createEmployee(
-            @ModelAttribute EmployeeDTOIU dto,
-            @RequestParam(required = false) MultipartFile photo
-    ) {
-       
-        String photoUrl = null;
-        if (photo != null && !photo.isEmpty()) {
-            try {
-                String fileName = dto.getFirstName()+dto.getLastName() + ".jpg";
-                Path uploadDir = Paths.get("src/main/resources/static/uploads/profile-photos");
-                if (!Files.exists(uploadDir)) {
-                    Files.createDirectories(uploadDir);
-                }
-
-                Path filePath = uploadDir.resolve(fileName);
-                Files.copy(photo.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-                photoUrl = "/uploads/profile-photos/" + fileName;
-                dto.setPhotoUrl(photoUrl);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        
-        EmployeeDTO savedEmployee = iEmployeeService.saveEmployee(dto);
-
-        
-        Employee employeeForLdap = new Employee();
-        BeanUtils.copyProperties(savedEmployee, employeeForLdap);
-        
+    public String createEmployee(@ModelAttribute EmployeeIUDTO dto) {
+        employeeService.createEmployeeWithPhoto(dto);
         return "redirect:/admin/employees";
     }
+
 }
