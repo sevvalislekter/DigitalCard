@@ -17,6 +17,4 @@ public class EmployeeEntityService {
     public EmployeeEntity findByRandomCode(String code) {
         return employeeRepository.findByRandomCode(code);
     }
-
-   
 }

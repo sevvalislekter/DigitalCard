@@ -1,40 +1,32 @@
 package com.sevvalislekter.controller;
 
+import com.sevvalislekter.services.EmployeeServiceProfile;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.sevvalislekter.entity.EmployeeEntity;
-import com.sevvalislekter.repository.EmployeeRepository;
+import com.sevvalislekter.dto.EmployeeDTO;
 
 @Controller
 public class ProfileController {
 
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeServiceProfile employeeServiceProfile;
 
-    public ProfileController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public ProfileController(EmployeeServiceProfile employeeServiceProfile) {
+        this.employeeServiceProfile = employeeServiceProfile;
     }
 
     @GetMapping("/p/{randomCode}")
     public String showProfile(@PathVariable String randomCode, Model viewData) {
-        System.out.println("Aranan randomCode: " + randomCode);
-
-        EmployeeEntity employeeEntity = employeeRepository.findByRandomCode(randomCode.trim());
-
-        if (employeeEntity == null) {
+        EmployeeDTO dto = employeeServiceProfile.ShowProfileForUser(randomCode);
+        if (dto == null) {
             return "redirect:/notFound";
         }
-
-        System.out.println("Bulunan employee: " + employeeEntity.getId());
-
-        viewData.addAttribute("employee", employeeEntity);
+        viewData.addAttribute("employee", dto);
         return "profile";
     }
-
-
 
     @GetMapping("/notFound")
     public String notFoundPage() {

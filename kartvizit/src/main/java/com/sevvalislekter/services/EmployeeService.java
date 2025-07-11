@@ -17,6 +17,8 @@ public interface EmployeeService {
     List<EmployeeEntity> findByQrActiveFalse();
     ResponseEntity<byte[]> generateVCard(String randomCode);
     void deactivateEmployeeByRandomCode(String randomCode);
-
     void createEmployeeWithPhoto(EmployeeIUDTO dto);
+   
+
+	
 }

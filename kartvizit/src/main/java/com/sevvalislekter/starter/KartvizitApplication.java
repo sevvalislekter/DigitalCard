@@ -15,5 +15,4 @@ public class KartvizitApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KartvizitApplication.class, args);
 	}
-
 }

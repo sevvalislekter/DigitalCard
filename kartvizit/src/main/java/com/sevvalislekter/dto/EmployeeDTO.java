@@ -20,6 +20,8 @@ public class EmployeeDTO {
     private String title;
     private String linkedinUrl;
     private String randomCode;
+    private String email;
+    private String phoneNumber;
 	private String photoUrl;
 	private String qrCodeUrl;
     private LocalDate exitDate;
@@ -84,6 +86,18 @@ public class EmployeeDTO {
 
 	public void setExitDate(LocalDate exitDate) {
 	    this.exitDate = exitDate;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email=email;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber=phoneNumber;
 	}
 
 }

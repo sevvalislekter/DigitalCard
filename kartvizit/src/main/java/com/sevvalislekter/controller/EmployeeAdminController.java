@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 public class EmployeeAdminController {
 
     private final EmployeeService employeeService;
-   
     public EmployeeAdminController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
@@ -20,7 +19,6 @@ public class EmployeeAdminController {
         viewData.addAttribute("employees", employees);
         return "admin/employees";
     }
-
     @GetMapping("/create")
     public String showCreateForm(Model viewData) {
     	viewData.addAttribute("employee", new EmployeeIUDTO());
@@ -36,9 +34,8 @@ public class EmployeeAdminController {
     public String showExEmployees(Model viewData) {
         var exEmployees = employeeService.findByQrActiveFalse();
         viewData.addAttribute("employees", exEmployees);
-        return "admin/exEmployees"; // 
+        return "admin/exEmployees"; 
     }
-
     @PostMapping("/create")
     public String createEmployee(@ModelAttribute EmployeeIUDTO dto) {
         employeeService.createEmployeeWithPhoto(dto);
