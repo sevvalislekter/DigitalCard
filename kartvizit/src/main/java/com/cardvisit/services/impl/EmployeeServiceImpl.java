@@ -14,7 +14,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.cardvisit.Utils.QRCodeGenerator;
 import com.cardvisit.dto.EmployeeDTO;
 import com.cardvisit.dto.EmployeeIUDTO;
@@ -30,7 +29,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
-
     @Override
     public void deactivateEmployeeByRandomCode(String randomCode) {
         EmployeeEntity employee = employeeRepository.findByRandomCode(randomCode);
@@ -42,13 +40,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     public void createEmployeeWithPhoto(EmployeeIUDTO dto) {
         try {
-            if (dto.getQrActive() == null) {
                 dto.setQrActive(true);
+            if (dto.getRandomCode() == null || dto.getRandomCode().isEmpty()) {
+                String randomCode = java.util.UUID.randomUUID().toString().toUpperCase().substring(0, 8);
+                dto.setRandomCode(randomCode);
             }
             String photoUrl = null;
             if (dto.getPhoto() != null && !dto.getPhoto().isEmpty()) {
                 try {
-                    String fileName = dto.getFirstName() + dto.getLastName() + ".jpg";
+                    String fileName = dto.getRandomCode() + ".jpg";
                     Path uploadDir = Paths.get("src/main/resources/static/uploads/profile-photos");
                     if (!Files.exists(uploadDir)) {
                         Files.createDirectories(uploadDir);
@@ -61,19 +61,49 @@ public class EmployeeServiceImpl implements EmployeeService {
                     dto.setPhotoUrl(photoUrl);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    throw new RuntimeException("Fotoğraf yüklenirken hata oluştu: " + e.getMessage(), e); // dosya adı profile_isim güncelleme 
+                    throw new RuntimeException("Fotoğraf yüklenirken hata oluştu: " + e.getMessage(), e);
                 }
             }
             EmployeeDTO savedEmployee = this.saveEmployee(dto);
-            EmployeeEntity employeeForLdap = new EmployeeEntity();
-            BeanUtils.copyProperties(savedEmployee, employeeForLdap);
+         
         } catch (RuntimeException e) {
-           
-            throw e;  
+            throw e;
         }
     }
+    public void updateEmployeeForm(EmployeeIUDTO dto) {
+        EmployeeEntity entity = employeeRepository.findByRandomCode(dto.getRandomCode());
 
-    @Override 
+        if (entity == null) return;
+
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
+        entity.setEmail(dto.getEmail());
+        entity.setTitle(dto.getTitle());
+        entity.setPhoneNumber(dto.getPhoneNumber());
+        entity.setLinkedinUrl(dto.getLinkedinUrl());
+
+        
+        if (dto.getPhotoUrl() != null) {
+            entity.setPhotoUrl(dto.getPhotoUrl());
+        }
+
+        
+        if (dto.getQrCodeUrl() != null) {
+            entity.setQrCodeUrl(dto.getQrCodeUrl());
+        }
+
+        employeeRepository.save(entity);
+    }
+
+
+    
+    @Override
+    public EmployeeEntity findByRandomCode(String randomCode) {
+        return employeeRepository.findByRandomCode(randomCode);
+    }
+
+
+    @Override
     public EmployeeDTO saveEmployee(EmployeeIUDTO employeeDtoIU) {
         EmployeeDTO response = new EmployeeDTO();
         EmployeeEntity employeeEntity = new EmployeeEntity();
@@ -88,15 +118,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         employeeEntity.setRandomCode(randomCode);
         EmployeeEntity savedEmployee = employeeRepository.save(employeeEntity);
+
+        
         String staticPath = new File("src/main/resources/static/uploads/qr-codes").getAbsolutePath();
         File uploadDir = new File(staticPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdirs();
         }
-        
 
-        String qrContent = "http://localhost:8080/p/" + savedEmployee.getRandomCode(); 
-        String qrFilePath = staticPath + File.separator + savedEmployee.getFirstName()+savedEmployee.getLastName() + ".png";
+        String qrContent = "http://localhost:8080/p/" + savedEmployee.getRandomCode();
+        String qrFilePath = staticPath + File.separator + savedEmployee.getRandomCode() + ".png";
 
         try {
             QRCodeGenerator.generateQRCodeImage(qrContent, qrFilePath, 250, 250);
@@ -104,12 +135,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (IOException | WriterException e) {
             e.printStackTrace();
         }
-        savedEmployee.setQrCodeUrl("static/uploads/qr-codes/" + savedEmployee.getFirstName()+savedEmployee.getLastName() + ".png");
+        savedEmployee.setQrCodeUrl("/uploads/qr-codes/" + savedEmployee.getRandomCode() + ".png");
         employeeRepository.save(savedEmployee);
 
         BeanUtils.copyProperties(savedEmployee, response);
         return response;
     }
+
     @Override
     public List<EmployeeEntity> getAllEmployees() {
         return employeeRepository.findByQrActiveTrue(); 

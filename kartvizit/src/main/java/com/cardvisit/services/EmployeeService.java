@@ -18,7 +18,9 @@ public interface EmployeeService {
     ResponseEntity<byte[]> generateVCard(String randomCode);
     void deactivateEmployeeByRandomCode(String randomCode);
     void createEmployeeWithPhoto(EmployeeIUDTO dto);
-   
+    EmployeeEntity findByRandomCode(String randomCode);
+
+    void updateEmployeeForm(EmployeeIUDTO dto);
 
 	
 }

@@ -18,7 +18,6 @@
 	
     <thead class="tab">
     <tr >
-		
         <th>İsim</th>
         <th>Soyisim</th>
         <th>Mail</th>
@@ -27,7 +26,7 @@
         <th>Unvan</th>
 		<th>Fotoğraf</th>
 		<th>Qr</th>
-		
+		<th>Bilgi güncelle</th>
     </tr>
     </thead>
     <tbody >
@@ -40,20 +39,20 @@
         <td th:text="${employee.title}"></td>
 		<td><img th:src="${employee.photoUrl}" alt="Fotoğraf" width="100" height="100"/></td>
 		<td>
-			<img th:src="${employee.qrCodeUrl}" alt="QR Kod" width="100" height="100"/>
+			<img th:src="@{${employee.qrCodeUrl}}" alt="QR Kod" width="100" height="100" />
 			<a th:href="${employee.qrCodeUrl}" 
 			   th:download="${'QR-' + employee.firstName + '-' + employee.lastName + '.png'}">
-
 		       İndir
 		    </a>
 			<a th:href="@{'/admin/employees/ex/' + ${employee.randomCode}}">
 			    <button>QR Pasif Et</button>
 			</a>
-
 		</td>
-		
-
-
+		<td>
+		   <a th:href="@{/admin/employees/update/{randomCode}(randomCode=${employee.randomCode})}">
+		        <button>Bilgileri güncelle</button>
+		    </a>
+		</td>
     </tr>
     </tbody>
 </table>

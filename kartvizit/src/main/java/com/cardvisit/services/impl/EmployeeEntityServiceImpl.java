@@ -9,16 +9,13 @@ import com.cardvisit.services.EmployeeEntityService;
 public class EmployeeEntityServiceImpl implements EmployeeEntityService {
 
     private final EmployeeRepository employeeRepository;
-
     public EmployeeEntityServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
-
     @Override
     public EmployeeEntity save(EmployeeEntity employeeEntity) {
         return employeeRepository.save(employeeEntity);
     }
-
     @Override
     public EmployeeEntity findByRandomCode(String code) {
         return employeeRepository.findByRandomCode(code);

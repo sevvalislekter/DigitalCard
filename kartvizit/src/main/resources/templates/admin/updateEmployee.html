@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Yeni Çalışan Ekle</title>
+	<link rel="stylesheet" th:href="@{/css/style2.css}" />
+</head>
+<body class="body2">
+    
+    
+	<form th:action="@{/admin/employees/update}" method="post" enctype="multipart/form-data" class="employee-form">
+	    <h1 class="page-title" th:text="${employee.randomCode} == null ? 'Yeni Çalışan Ekle' : 'Çalışan Güncelle'"></h1>
+
+	    <input type="hidden" name="randomCode" th:value="${employee.randomCode}" />
+
+	    <input type="text" name="firstName" placeholder="Ad" required class="form-input" th:value="${employee.firstName}"/><br/>
+	    <input type="text" name="lastName" placeholder="Soyad" required class="form-input" th:value="${employee.lastName}"/><br/>
+	    <input type="email" name="email" placeholder="Email" required class="form-input" th:value="${employee.email}"/><br/>
+	    <input type="text" name="title" placeholder="Ünvan" class="form-input" th:value="${employee.title}"/><br/>
+	    <input type="text" name="phoneNumber" placeholder="Telefon" class="form-input" th:value="${employee.phoneNumber}"/><br/>
+	    <input type="text" name="linkedinUrl" placeholder="LinkedIn URL" class="form-input" th:value="${employee.linkedinUrl}"/><br/>
+
+	    <label class="form-label">Fotoğraf (JPEG):</label><br/>
+	    <img th:if="${employee.photoUrl != null}" th:src="@{${employee.photoUrl}}" alt="Fotoğraf" width="100" /><br/>
+	    <input type="file" name="photo" class="form-input"/><br/>
+
+	    <button type="submit" class="form-button">Kaydet</button>
+	    <a href="/admin/employees" class="page-link">Çalışanlar</a>
+	</form>
+
+
+
+</body>
+</html>

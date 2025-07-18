@@ -37,8 +37,8 @@ public class EmployeeEntity {
     private String qrCodeUrl;
     @Column(name = "exit_date")
     private LocalDate exitDate;
-    @Column(name = "qr_active")
-    private Boolean qrActive=true;
+    @Column(name = "qr_active",nullable = false)
+    private boolean qrActive=true;
 
     
     
@@ -104,11 +104,11 @@ public class EmployeeEntity {
     public void setQrCodeUrl(String qrCodeUrl) {
         this.qrCodeUrl = qrCodeUrl;
     }
-    public Boolean getQrActive() {
+    public boolean getQrActive() {
         return qrActive;
     }
 
-    public void setQrActive(Boolean qrActive) {
+    public void setQrActive(boolean qrActive) {
         this.qrActive = qrActive;
     }
 

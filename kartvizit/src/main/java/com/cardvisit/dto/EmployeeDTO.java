@@ -25,7 +25,7 @@ public class EmployeeDTO {
 	private String photoUrl;
 	private String qrCodeUrl;
     private LocalDate exitDate;
-    private Boolean qrActive=true;
+    private boolean qrActive=true;
 
 	public String getQrCodeUrl() {
         return qrCodeUrl;
@@ -72,11 +72,11 @@ public class EmployeeDTO {
 	public void setPhotoUrl(String photoUrl) {
 	    	this.photoUrl=photoUrl;
 	}
-	public Boolean getQrActive() {
+	public boolean getQrActive() {
 	    return qrActive;
 	}
 
-	public void setQrActive(Boolean qrActive) {
+	public void setQrActive(boolean qrActive) {
 	    this.qrActive = qrActive;
 	}
 

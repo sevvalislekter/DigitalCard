@@ -14,6 +14,47 @@
     max-width: 400px;
     width: 100%;
 }
+@media (max-width: 600px) {
+    .employee-form,
+    .tab {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    .form-input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .form-button {
+        font-size: 16px;
+        padding: 12px 0;
+    }
+
+    .employee-table {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .employee-table th,
+    .employee-table td {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .page-title {
+        font-size: 20px;
+        padding: 0 8px;
+    }
+
+    .body2,
+    .body3 {
+        padding: 16px;
+        flex-direction: column;
+    }
+}
+
 .employee-table {
     width: 100%;
     max-width: 1200px;

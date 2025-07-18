@@ -22,13 +22,20 @@ public class ProfileController {
         EmployeeDTO dto = employeeServiceProfile.ShowProfileForUser(randomCode);
         if (dto == null) {
             return "redirect:/notFound";
+        }if(dto.getQrActive()==false) {
+        	return "redirect:/qr-disabled";
         }
         viewData.addAttribute("employee", dto);
         return "profile";
     }
-
     @GetMapping("/notFound")
     public String notFoundPage() {
         return "notfound";
     }
+    @GetMapping("/qr-disabled")
+    public String qrDisabledPage() {
+        return "error/qr-disabled"; 
+    }
+
+
 }
