@@ -64,9 +64,7 @@ src/
             └── utils/
                 └── QRCodeGenerator
 
-          KartvizitApplication
-Utils->
-          QRCodeGenerator
+
 
                 
     
