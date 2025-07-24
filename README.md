@@ -17,18 +17,25 @@ src/
 └── main/
     └── java/
         └── com.cardvisit/
+        
             ├── controller/
+            
             │   ├── EmployeeAdminController
+            
             │   ├── LoginController
+            
             │   ├── ProfileController
+            
             │   └── VcfGenerateCardController
             │
             ├── config/
             │   ├── SecurityConfig
+            
             │   └── WebConfig
             │
             ├── dto/
             │   ├── EmployeeDTO
+            
             │   └── EmployeeIUDTO
             │
             ├── entity/
@@ -40,10 +47,15 @@ src/
             ├── services/
             │   ├── impl/
             │   │   ├── EmployeeEntityService
+            
             │   │   ├── EmployeeServiceImpl
+            
             │   │   └── EmployeeServiceProfileImpl
+            
             │   ├── EmployeeEntityService
+            
             │   ├── EmployeeService
+            
             │   └── EmployeeServiceProfile
             │
             ├── starter/
