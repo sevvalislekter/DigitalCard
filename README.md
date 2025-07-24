@@ -1,0 +1,10 @@
+# Dijital kartvizit 
+Bu projeyi geliştirme amacım çalışanların kartlarındaki qr ile her kişiye özel bir url ile kişisel bilgileri barındıran bir site yapmak.Springboot eclipse ile projeyi geliştirdim.
+# Uygulamayı çalıştırmak için
+git clone https://github.com/sevvalislekter/DigitalCard.git
+cd DigitalCard
+./mvnw clean install         # Linux/macOS için
+
+mvnw.cmd clean install       # Windows için
+
+./mvnw spring-boot:run       # Uygulamayı çalıştırır
