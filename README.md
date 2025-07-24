@@ -12,30 +12,46 @@ mvnw.cmd clean install       # Windows için
 ./mvnw spring-boot:run       # Uygulamayı çalıştırır
 
 # Yapı
-Controller->
-           EmployeeAdminController
-           ProfileController
-           LoginController
-           VcfGenerateCardController
-Config->
-           SecurityConfig
-           WebConfig
-dto->
-           EmployeeDTO
-           EmployeeIUDTO
-Entity->
-           EmployeeEntity
-Repository->
-           EmployeeRepository
-services->
-           impl-> 
-                  EmployeeEntityService
-                  EmployeeServiceImpl
-                  EmployeeServiceProfileImpl
-          EmployeeEntityService
-          EmployeeService
-          EmployeeServiceProfile
-starter->
+
+src/
+└── main/
+    └── java/
+        └── com.cardvisit/
+            ├── controller/
+            │   ├── EmployeeAdminController
+            │   ├── LoginController
+            │   ├── ProfileController
+            │   └── VcfGenerateCardController
+            │
+            ├── config/
+            │   ├── SecurityConfig
+            │   └── WebConfig
+            │
+            ├── dto/
+            │   ├── EmployeeDTO
+            │   └── EmployeeIUDTO
+            │
+            ├── entity/
+            │   └── EmployeeEntity
+            │
+            ├── repository/
+            │   └── EmployeeRepository
+            │
+            ├── services/
+            │   ├── impl/
+            │   │   ├── EmployeeEntityService
+            │   │   ├── EmployeeServiceImpl
+            │   │   └── EmployeeServiceProfileImpl
+            │   ├── EmployeeEntityService
+            │   ├── EmployeeService
+            │   └── EmployeeServiceProfile
+            │
+            ├── starter/
+            │   └── KartvizitApplication.java
+            │
+            └── utils/
+                └── QRCodeGenerator
+
           KartvizitApplication
 Utils->
           QRCodeGenerator
