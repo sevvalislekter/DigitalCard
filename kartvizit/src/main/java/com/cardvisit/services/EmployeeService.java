@@ -3,6 +3,7 @@ package com.cardvisit.services;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 
 import com.cardvisit.dto.EmployeeDTO;
 import com.cardvisit.dto.EmployeeIUDTO;
@@ -21,6 +22,7 @@ public interface EmployeeService {
     EmployeeEntity findByRandomCode(String randomCode);
 
     void updateEmployeeForm(EmployeeIUDTO dto);
+    void showUpdate(Model model,String randomCode);
 
 	
 }
