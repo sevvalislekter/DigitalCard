@@ -5,7 +5,6 @@ import com.cardvisit.dto.EmployeeDTO;
 import com.cardvisit.entity.EmployeeEntity;
 import com.cardvisit.repository.EmployeeRepository;
 import com.cardvisit.services.EmployeeServiceProfile;
-
 @Service
 public class EmployeeServiceProfileImpl implements EmployeeServiceProfile {
 	private final EmployeeRepository employeeRepository;

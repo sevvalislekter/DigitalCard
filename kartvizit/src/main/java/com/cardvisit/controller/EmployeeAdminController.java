@@ -8,8 +8,6 @@ import com.cardvisit.services.EmployeeService;
 @Controller
 @RequestMapping("/admin/employees")
 public class EmployeeAdminController {
-
-
     private final EmployeeService employeeService;
     public EmployeeAdminController(EmployeeService employeeService) {
         this.employeeService = employeeService;

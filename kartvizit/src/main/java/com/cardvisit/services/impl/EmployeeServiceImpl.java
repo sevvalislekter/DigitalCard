@@ -54,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             dto.setRandomCode(randomCode);
         }
 
-        // Fotoğraf yükleme
+        
         if (dto.getPhoto() != null && !dto.getPhoto().isEmpty()) {
             try {
                 String fileName = dto.getRandomCode() + ".jpg";
@@ -75,13 +75,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             }
         }
 
-        this.saveEmployee(dto); // Foto yüklendikten sonra kaydet
+        this.saveEmployee(dto); 
     }
 
     @Override
     public void updateEmployeeForm(EmployeeIUDTO dto) {
         EmployeeEntity entity = employeeRepository.findByRandomCode(dto.getRandomCode());
-
         if (entity == null) return;
 
         entity.setFirstName(dto.getFirstName());
@@ -91,7 +90,26 @@ public class EmployeeServiceImpl implements EmployeeService {
         entity.setPhoneNumber(dto.getPhoneNumber());
         entity.setLinkedinUrl(dto.getLinkedinUrl());
 
-        if (dto.getPhotoUrl() != null) {
+      
+        if (dto.getPhoto() != null && !dto.getPhoto().isEmpty()) {
+            try {
+                String fileName = dto.getRandomCode() + ".jpg";
+                Path uploadDir = Paths.get("uploads/profile-photos");
+                if (!Files.exists(uploadDir)) {
+                    Files.createDirectories(uploadDir);
+                }
+
+                Path filePath = uploadDir.resolve(fileName);
+                Files.copy(dto.getPhoto().getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                String photoUrl = "/uploads/profile-photos/" + fileName;
+                entity.setPhotoUrl(photoUrl); 
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Fotoğraf güncellenirken hata oluştu: " + e.getMessage(), e);
+            }
+        } else if (dto.getPhotoUrl() != null) {
+            
             entity.setPhotoUrl(dto.getPhotoUrl());
         }
 
@@ -101,6 +119,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.save(entity);
     }
+
 
     @Override
     public void showUpdate(Model model, String randomCode) {
@@ -139,7 +158,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         EmployeeEntity savedEmployee = employeeRepository.save(employeeEntity);
 
-        // QR kodu oluştur ve dış klasöre yaz
+       
         String staticPath = new File("uploads/qr-codes").getAbsolutePath();
         File uploadDir = new File(staticPath);
         if (!uploadDir.exists()) {
