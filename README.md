@@ -11,7 +11,16 @@ mvnw.cmd clean install       # Windows için
 
 ./mvnw spring-boot:run       # Uygulamayı çalıştırır
 
-# Yapı
+## Proje de kullandığım teknolojiler
+
+springboot eclipse
+
+postgresql 
+
+openLdap
+
+## Yapı
+
 
 
 src/
