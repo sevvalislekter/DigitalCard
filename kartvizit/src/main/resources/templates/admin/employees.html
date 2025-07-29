@@ -14,9 +14,7 @@
 	  <a style="display: inline-block;padding: 15px;" th:href="@{/admin/employees/exEmployees}" class="page-link">Eski Çalışanlar</a>
 	 <a class="page-link" style="display: inline-block;" href="/login">Çıkış</a>
 	</div>
-	
 <table class="employee-table" >
-	
     <thead class="tab">
     <tr >
         <th>İsim</th>
@@ -35,7 +33,13 @@
         <td th:text="${employee.firstName}"></td>
         <td th:text="${employee.lastName}"></td>
         <td th:text="${employee.email}"></td>
-        <td><a th:href="${employee.linkedinUrl}" th:text="${employee.linkedinUrl}"></a></td>
+		<td>
+		  <a th:href="${employee.linkedinUrl.startsWith('http') ? employee.linkedinUrl : 'https://' + employee.linkedinUrl}" 
+		     th:text="${employee.linkedinUrl}" 
+		     target="_blank" 
+		     rel="noopener noreferrer">
+		  </a>
+		</td>
         <td th:text="${employee.phoneNumber}"></td>
         <td th:text="${employee.title}"></td>
 		<td><img th:src="${employee.photoUrl}" alt="Fotoğraf" width="100" height="100"/></td>

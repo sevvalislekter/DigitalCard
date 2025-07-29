@@ -7,16 +7,15 @@ import com.cardvisit.repository.EmployeeRepository;
 import com.cardvisit.services.EmployeeServiceProfile;
 @Service
 public class EmployeeServiceProfileImpl implements EmployeeServiceProfile {
+	
 	private final EmployeeRepository employeeRepository;
+	
 	public EmployeeServiceProfileImpl(EmployeeRepository employeeRepository) {
 		this.employeeRepository=employeeRepository;
 	}
     @Override
     public EmployeeDTO ShowProfileForUser(String randomCode) {
-        System.out.println("Aranan randomCode: " + randomCode);
         EmployeeEntity employeeEntity = employeeRepository.findByRandomCode(randomCode.trim());
-        System.out.println("Bulunan employee: " + 
-            (employeeEntity != null ? employeeEntity.getId() : "Yok"));
         if(employeeEntity==null) {
         	return null;
         }

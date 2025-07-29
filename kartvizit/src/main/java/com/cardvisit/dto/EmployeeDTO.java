@@ -1,15 +1,7 @@
 package com.cardvisit.dto;
-
-
-
 import java.time.LocalDate;
-
-
 import lombok.AllArgsConstructor;
-
-
 import lombok.NoArgsConstructor;
-
 
 @NoArgsConstructor
 @AllArgsConstructor

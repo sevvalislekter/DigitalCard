@@ -1,5 +1,4 @@
 package com.cardvisit.services.impl;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,7 +8,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
@@ -17,12 +15,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import com.cardvisit.Utils.QRCodeGenerator;
 import com.cardvisit.dto.EmployeeDTO;
 import com.cardvisit.dto.EmployeeIUDTO;
 import com.cardvisit.entity.EmployeeEntity;
 import com.cardvisit.repository.EmployeeRepository;
+import com.cardvisit.services.AppConfigService;
 import com.cardvisit.services.EmployeeService;
 import com.google.zxing.WriterException;
 
@@ -30,11 +28,12 @@ import com.google.zxing.WriterException;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final AppConfigService appConfigService;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository,AppConfigService appConfigService) {
         this.employeeRepository = employeeRepository;
+        this.appConfigService=appConfigService;
     }
-
     @Override
     public void deactivateEmployeeByRandomCode(String randomCode) {
         EmployeeEntity employee = employeeRepository.findByRandomCode(randomCode);
@@ -53,8 +52,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             String randomCode = java.util.UUID.randomUUID().toString().toUpperCase().substring(0, 8);
             dto.setRandomCode(randomCode);
         }
-
-        
         if (dto.getPhoto() != null && !dto.getPhoto().isEmpty()) {
             try {
                 String fileName = dto.getRandomCode() + ".jpg";
@@ -140,7 +137,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeEntity findByRandomCode(String randomCode) {
         return employeeRepository.findByRandomCode(randomCode);
     }
-
     @Override
     public EmployeeDTO saveEmployee(EmployeeIUDTO dto) {
         EmployeeDTO response = new EmployeeDTO();
@@ -151,21 +147,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (randomCode == null || randomCode.isEmpty()) {
             randomCode = java.util.UUID.randomUUID().toString().toUpperCase();
         }
+        
         if (randomCode.length() > 8) {
             randomCode = randomCode.substring(0, 8);
         }
         employeeEntity.setRandomCode(randomCode);
 
         EmployeeEntity savedEmployee = employeeRepository.save(employeeEntity);
-
-       
         String staticPath = new File("uploads/qr-codes").getAbsolutePath();
         File uploadDir = new File(staticPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdirs();
         }
+        
+        String baseUrl = appConfigService.GetConfigValue("BASE_URL");
+        if (baseUrl == null || baseUrl.isEmpty()) {
+            baseUrl = "http://localhost:8080"; 
+        }
+        String qrContent = baseUrl + "/p/" + savedEmployee.getRandomCode();
 
-        String qrContent = "http://localhost:8080/p/" + savedEmployee.getRandomCode();
         String qrFilePath = staticPath + File.separator + savedEmployee.getRandomCode() + ".png";
 
         try {

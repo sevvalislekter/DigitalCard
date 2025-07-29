@@ -10,4 +10,3 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Intege
     List<EmployeeEntity> findByQrActiveTrue();
     List<EmployeeEntity> findByQrActiveFalse();
 }
-

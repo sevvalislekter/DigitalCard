@@ -30,6 +30,6 @@ public class QRCodeGenerator {
 
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path, config);
 
-        System.out.println("Şeffaf QR oluşturuldu: " + new File(filePath).getAbsolutePath());
+        System.out.println(" QR oluşturuldu: " + new File(filePath).getAbsolutePath());
     }
 }

@@ -40,8 +40,6 @@ public class EmployeeEntity {
     @Column(name = "qr_active",nullable = false)
     private boolean qrActive=true;
 
-    
-    
     public Integer getId() {
     	return id;
     }

@@ -25,7 +25,7 @@ class EmployeeServiceImplTest {
 
     private EmployeeRepository employeeRepository;
     private EmployeeServiceImpl employeeService;
-
+    private AppConfigServiceImpl appConfigServiceImpl;
     private List<EmployeeEntity> fakeDb;
 
     @BeforeEach
@@ -242,7 +242,7 @@ class EmployeeServiceImplTest {
          
         };
 
-        employeeService = new EmployeeServiceImpl(employeeRepository);
+        employeeService = new EmployeeServiceImpl(employeeRepository,appConfigServiceImpl);
     }
 
     @Test

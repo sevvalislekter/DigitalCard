@@ -30,6 +30,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    
     @Bean
     LdapContextSource contextSource() {
         LdapContextSource contextSource = new LdapContextSource();

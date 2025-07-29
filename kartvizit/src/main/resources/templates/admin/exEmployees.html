@@ -6,12 +6,10 @@
     <link rel="stylesheet" th:href="@{/css/style2.css}" />
 </head>
 <body class="body3">
-
     <div style="text-align: center; margin: 20px 0;">
         <h1 class="page-title">Eski Çalışan Listesi</h1>
         <a th:href="@{/admin/employees}" class="page-link">Aktif Çalışanlara Dön</a>
     </div>
-
     <table class="employee-table">
         <thead class="tab">
             <tr>
@@ -47,10 +45,8 @@
                 </td>
                 <td><span style="color:red;">QR Pasif</span></td>
 				<td th:text="${#temporals.format(employee.exitDate, 'dd.MM.yyyy')}"></td>
-
             </tr>
         </tbody>
     </table>
-
 </body>
 </html>

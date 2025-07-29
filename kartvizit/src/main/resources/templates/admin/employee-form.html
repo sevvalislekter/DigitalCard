@@ -5,8 +5,6 @@
 	<link rel="stylesheet" th:href="@{/css/style2.css}" />
 </head>
 <body class="body2">
-    
-    
     <form th:action="@{/admin/employees/create}" method="post" enctype="multipart/form-data" class="employee-form">
 		<h1 class="page-title">Yeni Çalışan Ekle</h1>
         <input type="text" name="firstName" placeholder="Ad" required class="form-input"/><br/>
@@ -21,7 +19,5 @@
 		<a href="/admin/employees" class="page-link">Çalışanlar</a>
 		<a href="/login" class="page-link">Çıkış</a>
     </form>
-
-
 </body>
 </html>

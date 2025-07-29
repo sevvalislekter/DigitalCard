@@ -11,7 +11,6 @@ public class VcfGenerateCardController {
     public VcfGenerateCardController(EmployeeService employeeService) {
 
         this.employeeService = employeeService;
-
     }
     @GetMapping("/vcard/{randomCode}")
     public ResponseEntity<byte[]> generateVCard(@PathVariable String randomCode) {

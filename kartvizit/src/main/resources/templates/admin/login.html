@@ -1,27 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="tr">
 <head>
     <meta charset="UTF-8">
-	<link rel="stylesheet" th:href="@{/css/login.css}" />
     <title>Giriş Yap</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div>
+<div class="login-container">
     <h2>Yönetici Girişi</h2>
-    <div th:if="${param.error}" style="color:red;">
+    <div th:if="${param.error}" style="color:red; margin-bottom: 10px;">
         Giriş başarısız. Kullanıcı adı veya şifre hatalı.
     </div>
-    <div th:if="${param.logout}" style="color:green;">
-        Başarıyla çıkış yaptınız.
-    </div>
-
     <form th:action="@{/login}" method="post">
-        <label>Kullanıcı Adı:</label>
-        <input type="text" name="username" required />
-        <br/>
-        <label>Şifre:</label>
-        <input type="password" name="password" required />
-        <br/>
+        <label for="username">Kullanıcı Adı:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Şifre:</label>
+        <input type="password" id="password" name="password" required />
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <button type="submit">Giriş Yap</button>
     </form>
