@@ -14,7 +14,9 @@ mvnw.cmd clean install       # Windows için
 ## Proje de kullandığım teknolojiler
 
 springboot eclipse
+
 postgresql 
+
 openLdap
 
 ## Yapı
