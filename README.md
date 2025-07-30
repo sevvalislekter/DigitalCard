@@ -13,11 +13,30 @@ mvnw.cmd clean install       # Windows için
 
 ## Proje de kullandığım teknolojiler
 
-springboot eclipse
+Springboot eclipse
 
-postgresql 
+Postgresql 
 
-openLdap
+OpenLdap
+
+
+## Özellikler
+
+-Admin paneliyle çalışan ekleme(ad,soyad,telefon,linkedin url,email,title,fotoğraf)
+
+-Admin panelinde çalışanları listeleme
+
+-Admin panelinde çalışanları gösteren yerde QR resim indirme, Bilgileri güncelleme,Qr pasif etme
+
+-QR pasif etme butonuyla çalışanın Qr kodu etkisiz hale geliyor.
+
+-Bu sayede QR pasif ettiğimiz tarihi de işten çıkış tarihi olarak güncelliyor. 
+
+-Ve en üstte eski çalışanlar olarak eklediğimiz linke tıkladığımızda Qr active false olan çalışanlar ekrana geliyor.
+
+-Qr kod okutulunca kişiye özel çıkan url ile kişisel kartvizit sitesine ulaşmış oluyoruz.Yine içinde kişisel bilgiler , fotoğraf , title ve kişi ekle butonuyla vcf dosya uzantısı açılıyor.
+
+
 
 ## Yapı
 
@@ -50,10 +69,12 @@ src/
             │
             ├── entity/
             │   └── EmployeeEntity
-            │
+            
+            │    └──AppConfigEntity
             ├── repository/
             │   └── EmployeeRepository
-            │
+            
+            │    └──AppConfigRepository
             ├── services/
             │   ├── impl/
             │   │   ├── EmployeeEntityService
@@ -62,10 +83,14 @@ src/
             
             │   │   └── EmployeeServiceProfileImpl
             
+                    └──AppConfigServiceImpl
+            
             │   ├── EmployeeEntityService
             
             │   ├── EmployeeService
-            
+              
+                ├──AppConfigService
+                
             │   └── EmployeeServiceProfile
             │
             ├── starter/
@@ -73,7 +98,6 @@ src/
             │
             └── utils/
                 └── QRCodeGenerator
-
 
 
                 
