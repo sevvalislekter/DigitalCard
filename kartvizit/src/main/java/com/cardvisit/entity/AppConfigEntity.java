@@ -16,9 +16,9 @@ public class AppConfigEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "config_key")
+	@Column(name = "key")
 	private String configKey;
-	@Column(name = "config_value")
+	@Column(name = "value")
 	private String configValue;
 	
 	public String getConfigKey() {

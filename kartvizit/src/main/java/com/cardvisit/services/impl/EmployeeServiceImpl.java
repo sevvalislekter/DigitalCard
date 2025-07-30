@@ -19,10 +19,13 @@ import com.cardvisit.Utils.QRCodeGenerator;
 import com.cardvisit.dto.EmployeeDTO;
 import com.cardvisit.dto.EmployeeIUDTO;
 import com.cardvisit.entity.EmployeeEntity;
+import com.cardvisit.entity.EmployeeEntity.Status;
 import com.cardvisit.repository.EmployeeRepository;
 import com.cardvisit.services.AppConfigService;
 import com.cardvisit.services.EmployeeService;
 import com.google.zxing.WriterException;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -132,7 +135,49 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeIUDTO.setQrCodeUrl(employeeEntity.getQrCodeUrl());
         model.addAttribute("employee", employeeIUDTO);
     }
+    
+    @Transactional
+    public void QrCard(String randomCode) {
+        EmployeeEntity employeeEntity = employeeRepository.findByRandomCode(randomCode);
+        if (employeeEntity == null) {
+            System.out.println("Employee not found");
+            return;
+        }
 
+        System.out.println("Current status: " + employeeEntity.getStatus());
+        System.out.println("Target status : " + Status.QR_Basıldı);
+
+        if (employeeEntity.getStatus() != Status.QR_Basıldı) {
+            employeeEntity.setStatus(Status.QR_Basıldı);
+            employeeRepository.saveAndFlush(employeeEntity);
+            System.out.println("Updated status: " + employeeEntity.getStatus());
+        } else {
+            System.out.println("No change needed, already QR_BASILDI");
+        }
+    }
+
+    @Transactional
+    public void NfcCard(String randomCode) {
+    	EmployeeEntity employeeEntity=employeeRepository.findByRandomCode(randomCode);
+    	
+    	if(employeeEntity==null) {
+    		return;
+    	}
+    	employeeEntity.setStatus(Status.Nfc_Yazıldı);
+    	employeeRepository.save(employeeEntity);
+    }
+    
+   
+    @Transactional
+    public void Cardp(String randomCode) {
+    	EmployeeEntity employeeEntity=employeeRepository.findByRandomCode(randomCode);
+    	if(employeeEntity==null) {
+    		return;
+    	}
+    	employeeEntity.setStatus(Status.Kart_Hazır);
+    	employeeRepository.save(employeeEntity);
+    }
+    
     @Override
     public EmployeeEntity findByRandomCode(String randomCode) {
         return employeeRepository.findByRandomCode(randomCode);
@@ -160,7 +205,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             uploadDir.mkdirs();
         }
         
-        String baseUrl = appConfigService.GetConfigValue("BASE_URL");
+        String baseUrl = appConfigService.getConfigValue("BASE_URL");
         if (baseUrl == null || baseUrl.isEmpty()) {
             baseUrl = "http://localhost:8080"; 
         }

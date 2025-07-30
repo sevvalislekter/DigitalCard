@@ -4,6 +4,7 @@ import com.cardvisit.repository.EmployeeRepository;
 import com.cardvisit.entity.EmployeeEntity;
 import com.cardvisit.services.EmployeeEntityService;
 
+
 @Service
 public class EmployeeEntityServiceImpl implements EmployeeEntityService {
     private final EmployeeRepository employeeRepository;
@@ -15,7 +16,7 @@ public class EmployeeEntityServiceImpl implements EmployeeEntityService {
         return employeeRepository.save(employeeEntity);
     }
     @Override
-    public EmployeeEntity findByRandomCode(String code) {
-        return employeeRepository.findByRandomCode(code);
+    public EmployeeEntity findByRandomCode(String randomCode) {
+        return employeeRepository.findByRandomCode(randomCode);
     }
 }

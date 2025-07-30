@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cardvisit.entity.EmployeeEntity;
 @Repository
-public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Integer> {
+public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
     EmployeeEntity findByRandomCode(String randomCode);
     List<EmployeeEntity> findByQrActiveTrue();
     List<EmployeeEntity> findByQrActiveFalse();

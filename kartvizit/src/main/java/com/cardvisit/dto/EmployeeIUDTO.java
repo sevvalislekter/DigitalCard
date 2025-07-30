@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cardvisit.entity.EmployeeEntity.Status;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -24,7 +26,10 @@ public class EmployeeIUDTO {
 	private String qrCodeUrl;
     private LocalDate exitDate;
     private boolean qrActive = true;  
+    private  Status status ;
+    private LocalDate startDate;
     private MultipartFile photo;
+    
 	public MultipartFile getPhoto() {
         return photo;
     }
@@ -104,6 +109,23 @@ public class EmployeeIUDTO {
 	public void setExitDate(LocalDate exitDate) {
 	    this.exitDate = exitDate;
 	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+	
 
 }
 

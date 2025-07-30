@@ -1,5 +1,5 @@
 package com.cardvisit.services;
 
-public interface AppConfigService {
+public interface AppConfigEntityService {
     String getConfigValue(String key);
 }

@@ -1,5 +1,8 @@
 package com.cardvisit.dto;
 import java.time.LocalDate;
+
+import com.cardvisit.entity.EmployeeEntity.Status;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +21,8 @@ public class EmployeeDTO {
 	private String qrCodeUrl;
     private LocalDate exitDate;
     private boolean qrActive=true;
+    private LocalDate startDate;
+    private  Status status ;
 
 	public String getQrCodeUrl() {
         return qrCodeUrl;
@@ -90,6 +95,22 @@ public class EmployeeDTO {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber=phoneNumber;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 	}
 
 }

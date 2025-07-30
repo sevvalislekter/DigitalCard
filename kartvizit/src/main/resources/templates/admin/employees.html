@@ -1,65 +1,105 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-	<link rel="stylesheet" th:href="@{/css/style2.css}" />
+    <link rel="stylesheet" th:href="@{/css/style2.css}" />
     <title>Çalışan Listesi</title>
 </head>
-<body class="body3" >
-	<div style="text-align: center; margin: 20px 0;justify-content: center;">
-	  <h1 class="page-title">Çalışan Listesi</h1>
-	  
-	  <a style="display: inline-block;padding: 15px;" th:href="@{/admin/employees/create}" class="page-link">Yeni Çalışan Ekle</a>
-	  <a style="display: inline-block;padding: 15px;" th:href="@{/admin/employees/exEmployees}" class="page-link">Eski Çalışanlar</a>
-	 <a class="page-link" style="display: inline-block;" href="/login">Çıkış</a>
-	</div>
-<table class="employee-table" >
-    <thead class="tab">
-    <tr >
-        <th>İsim</th>
-        <th>Soyisim</th>
-        <th>Mail</th>
-        <th>LinkedIn</th>
-        <th>Telefon</th>
-        <th>Unvan</th>
-		<th>Fotoğraf</th>
-		<th>Qr</th>
-		<th>Bilgi güncelle</th>
-    </tr>
-    </thead>
-    <tbody >
-    <tr  th:each="employee : ${employees}">
-        <td th:text="${employee.firstName}"></td>
-        <td th:text="${employee.lastName}"></td>
-        <td th:text="${employee.email}"></td>
-		<td>
-		  <a th:href="${employee.linkedinUrl.startsWith('http') ? employee.linkedinUrl : 'https://' + employee.linkedinUrl}" 
-		     th:text="${employee.linkedinUrl}" 
-		     target="_blank" 
-		     rel="noopener noreferrer">
-		  </a>
-		</td>
-        <td th:text="${employee.phoneNumber}"></td>
-        <td th:text="${employee.title}"></td>
-		<td><img th:src="${employee.photoUrl}" alt="Fotoğraf" width="100" height="100"/></td>
-		<td>
-			<img th:src="@{${employee.qrCodeUrl}}" alt="QR Kod" width="100" height="100" />
-			<a th:href="${employee.qrCodeUrl}" 
-			   th:download="${'QR-' + employee.firstName + '-' + employee.lastName + '.png'}">
-		       İndir
-		    </a>
-			<a th:href="@{'/admin/employees/ex/' + ${employee.randomCode}}">
-			    <button>QR Pasif Et</button>
-			</a>
-		</td>
-		<td>
-		   <a th:href="@{/admin/employees/update/{randomCode}(randomCode=${employee.randomCode})}">
-		        <button>Bilgileri güncelle</button>
-		    </a>
-		</td>
-    </tr>
-    </tbody>
-</table>
+<body class="body3">
+    <div style="text-align: center; margin: 20px 0; justify-content: center;">
+        <h1 class="page-title">Çalışan Listesi</h1>
+
+        <a style="display: inline-block; padding: 15px;" th:href="@{/admin/employees/create}" class="page-link">Yeni Çalışan Ekle</a>
+        <a style="display: inline-block; padding: 15px;" th:href="@{/admin/employees/exEmployees}" class="page-link">Eski Çalışanlar</a>
+        <a class="page-link" style="display: inline-block;" href="/login">Çıkış</a>
+    </div>
+
+    <table class="employee-table">
+        <thead class="tab">
+            <tr>
+                <th>İsim</th>
+                <th>Soyisim</th>
+                <th>Mail</th>
+                <th>İşe giriş Tarihi</th>
+                <th>LinkedIn</th>
+                <th>Telefon</th>
+                <th>Unvan</th>
+                <th>Fotoğraf</th>
+                <th>Qr</th>
+                <th>Bilgi güncelle</th>
+                <th>Kart İşlemleri</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.email}"></td>
+                <td th:text="${employee.startDate}"></td>
+                <td>
+                    <a th:href="${employee.linkedinUrl.startsWith('http') ? employee.linkedinUrl : 'https://' + employee.linkedinUrl}"
+                       th:text="${employee.linkedinUrl}"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                    </a>
+                </td>
+                <td th:text="${employee.phoneNumber}"></td>
+                <td th:text="${employee.title}"></td>
+                <td><img th:src="${employee.photoUrl}" alt="Fotoğraf" width="100" height="100" /></td>
+                <td>
+                    <img th:src="@{${employee.qrCodeUrl}}" alt="QR Kod" width="100" height="100" />
+                    <a th:href="${employee.qrCodeUrl}"
+                       th:download="${'QR-' + employee.firstName + '-' + employee.lastName + '.png'}">
+                        İndir
+                    </a>
+                    <a th:href="@{'/admin/employees/ex/' + ${employee.randomCode}}">
+                        <button>Çalışan Sil</button>
+                    </a>
+                </td>
+				<td>
+				    <a th:href="@{/admin/employees/update/{randomCode}(randomCode=${employee.randomCode})}">
+				        <button>Bilgileri güncelle</button>
+				    </a>
+				</td>
+
+				<td>
+				    <!-- QR Basıldı durumu -->
+				    <div th:if="${employee.status != null and employee.status.name() == 'QR_Basıldı'}" style="color: green;">
+				        Qr Basıldı
+				    </div>
+				    <div th:if="${employee.status == null or employee.status.name() != 'QR_Basıldı'}">
+				        <a th:href="@{/admin/employees/qrcardprocees/{randomCode}(randomCode=${employee.randomCode})}" style="color: red;">
+				            Qr Basılma
+				        </a>
+				    </div>
+				    <br />
+
+				    <!-- Nfc Yazıldı durumu -->
+				    <div th:if="${employee.status != null and employee.status.name() == 'Nfc_Yazıldı'}" style="color: green;">
+				        Nfc Yazıldı
+				    </div>
+				    <div th:if="${employee.status == null or employee.status.name() != 'Nfc_Yazıldı'}">
+				        <a th:href="@{/admin/employees/nfccardprocees/{randomCode}(randomCode=${employee.randomCode})}" style="color: red;">
+				            Nfc Yazılma
+				        </a>
+				    </div>
+				    <br />
+
+				    <!-- Kart Hazır durumu -->
+				    <div th:if="${employee.status != null and employee.status.name() == 'Kart_Hazır'}" style="color: green;">
+				        Kart Hazır
+				    </div>
+				    <div th:if="${employee.status == null or employee.status.name() != 'Kart_Hazır'}">
+				        <a th:href="@{/admin/employees/cardproceesdone/{randomCode}(randomCode=${employee.randomCode})}" style="color: red;">
+				            Kart Hazır
+				        </a>
+				    </div>
+				</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    
 </body>
-</html>
+</html> 

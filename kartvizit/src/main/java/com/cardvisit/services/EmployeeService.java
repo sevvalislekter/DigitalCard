@@ -20,5 +20,7 @@ public interface EmployeeService {
     EmployeeEntity findByRandomCode(String randomCode);
     void updateEmployeeForm(EmployeeIUDTO dto);
     void showUpdate(Model model,String randomCode);
-
+    void QrCard(String randomCode);
+    void NfcCard(String randomCode);
+    void Cardp(String randomCode);
 }

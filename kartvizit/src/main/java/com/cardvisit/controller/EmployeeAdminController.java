@@ -51,4 +51,22 @@ public class EmployeeAdminController {
         employeeService.updateEmployeeForm(dto);
         return "redirect:/admin/employees"; 
     }
+    @GetMapping("/qrcardprocees/{randomCode}")
+    public String QrDone(@PathVariable String randomCode) {
+        System.out.println("Calling QrCard for: " + randomCode);
+        employeeService.QrCard(randomCode);
+        return "redirect:/admin/employees"; 
+    }
+
+    @GetMapping("/nfccardprocees/{randomCode}")
+    public String NfcWrite (@PathVariable String randomCode) {
+    	employeeService.NfcCard(randomCode);
+    	return "redirect:/admin/employees"; 
+    }
+   @GetMapping("/cardproceesdone/{randomCode}")
+   public String CardProcees(@PathVariable String randomCode) {
+	   employeeService.Cardp(randomCode);
+	   return "redirect:/admin/employees";
+   }
+  
 }
